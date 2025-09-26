@@ -46,10 +46,7 @@ cd app
 
 ## Cloud Run へのデプロイ
 
-1. コンテナイメージをビルドしてアップロードします。
-   ```bash
-   gcloud builds submit --tag gcr.io/PROJECT_ID/bandwith-scraper --file backend/Dockerfile .
-   ```
+1. コンテナイメージを Cloud Build でビルドしてアップロードします。\n   ```bash\n   gcloud builds submit --config cloudbuild.yaml .\n   ```
 2. Cloud Run にデプロイします。
    ```bash
    gcloud run deploy bandwith-scraper \
@@ -83,3 +80,4 @@ cd app
 - UI はジョブ状態をポーリングし、キュー待ちや実行中の件数を表示します。
 - CSV はクライアント側で生成されるため、サーバー側にファイルを残しません。
 - `scraping.py` の `scrape_as_json` を再利用すれば追加 API やバッチ処理を容易に構築できます。
+
