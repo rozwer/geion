@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bandwith Scraper Console</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <section class="panel hero">
+        <h1>Bandwith スクレイピングコンソール</h1>
+        <p class="lead">
+          Bandwith アカウントの認証情報を入力して、バンドとメンバーの一覧を取得します。
+          実行は最大5件まで同時処理され、残りはキューで順番に処理されます。
+        </p>
+        <form id="scrape-form" class="form">
+          <div class="field">
+            <label for="email">メールアドレス</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="password">パスワード</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" required />
+          </div>
+          <div class="field">
+            <label for="exclude">除外したいニックネーム</label>
+            <input id="exclude" name="exclude" type="text" required />
+            <small class="hint">集計から外したいユーザー名を1つ入力してください。</small>
+          </div>
+          <div class="form-actions">
+            <button id="submit-btn" type="submit">スクレイピングを開始</button>
+            <button id="reset-btn" type="button" class="ghost" disabled>リセット</button>
+          </div>
+        </form>
+        <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+        <div id="queue-info" class="queue-info" aria-live="polite"></div>
+      </section>
+
+      <section class="panel" id="result-panel" hidden>
+        <div class="panel-header">
+          <h2>スクレイピング結果</h2>
+          <div class="tags" id="status-tags"></div>
+        </div>
+        <div class="summary" id="result-summary"></div>
+        <div class="downloads">
+          <p>JSON は下部に表示されます。必要に応じて CSV をダウンロードしてください。</p>
+          <div class="download-buttons">
+            <button id="download-bands" type="button" disabled>バンド一覧 CSV</button>
+            <button id="download-band-rank" type="button" disabled>バンドランキング CSV</button>
+            <button id="download-member-rank" type="button" disabled>メンバーランキング CSV</button>
+          </div>
+        </div>
+        <details class="json-viewer" open>
+          <summary>JSON を表示</summary>
+          <pre id="json-output"></pre>
+        </details>
+      </section>
+    </main>
+    <footer class="footer">
+      <span id="system-status"></span>
+      <span>Powered by Firebase Hosting + Cloud Run</span>
+    </footer>
+    <script src="app.js" defer></script>
+  </body>
+</html>
